@@ -1,3 +1,6 @@
+
+https://travis-ci.org/MarianelaClara/TrabajoTarjeta2018.svg?branch=master
+
 # Trabajo Tarjeta: Versión 2018
 
 El siguiente trabajo es un enunciado iterativo. Todas las semanas nuevos
