@@ -1,5 +1,6 @@
 # Trabajo Tarjeta: Versión 2018
 
+
 El siguiente trabajo es un enunciado iterativo. Todas las semanas nuevos
 requerimientos serán agregados y/o modificados para ilustrar la dinámica de
 desarrollo de software.
