@@ -7,9 +7,13 @@ class Boleto implements BoletoInterface {
     protected $valor;
 
     protected $colectivo;
+	
+    protected $saldoActual;
 
     public function __construct($valor, $colectivo, $tarjeta) {
         $this->valor = $valor;
+	$this->colectivo= $colectivo;
+	$this->saldoActual= $tarjeta;
     }
 
     /**
@@ -27,7 +31,7 @@ class Boleto implements BoletoInterface {
      * @return ColectivoInterface
      */
     public function obtenerColectivo() {
-
+	return $this->colectivo;
     }
 
 }
