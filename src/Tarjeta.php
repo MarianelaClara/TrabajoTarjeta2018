@@ -9,16 +9,16 @@ class Tarjeta implements TarjetaInterface {
 
       if ($monto == 10 || $monto == 20 || $monto == 30 || $monto == 50 || $monto == 100) {
         $this->saldo += $monto;
-	return TRUE;
+	      return TRUE;
       }
 
       if ($monto == 510.15) {
-	$this->saldo += ($monto + 81.93);
-	return TRUE;
+	      $this->saldo += ($monto + 81.93);
+        	return TRUE;
       }
       if ($monto == 962.59) {
-	$this->saldo += ($monto + 221.58);
-	return TRUE;
+	      $this->saldo += ($monto + 221.58);
+	      return TRUE;
       }
 
       return FALSE;
