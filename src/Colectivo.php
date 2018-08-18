@@ -9,7 +9,7 @@ class Colectivo implements ColectivoInterface {
 	protected $empresa;
 
 	public function __construct($linea, $numero, $empresa) {
-        $this->linea = $linea;
+    	$this->linea = $linea;
 		$this->numero = $numero;
 		$this->empresa = $empresa;
 	}
@@ -26,9 +26,14 @@ class Colectivo implements ColectivoInterface {
 	
 	public function pagarCon(TarjetaInterface $tarjeta) {
 		
-		if($tarjeta->saldo >= 14.80){
-			$tarjeta->saldo -= 14.80;
-			return (new Boleto(14.80, $this, $tarjeta->saldo));
+		if($tarjeta->saldo >= $tarjeta->valor){
+			$tarjeta->saldo -= $tarjeta->valor;
+			return (new Boleto($tarjeta->valor, $this, $tarjeta->saldo));
+		}
+		if($tarjeta->plus<2){
+			$tarjeta->saldo -= $tarjeta->valor;
+			$tarjeta->plus++;
+			return (new Boleto($tarjeta->valor, $this, $tarjeta->saldo));
 		}
 		return FALSE;
 	}

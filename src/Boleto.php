@@ -10,10 +10,10 @@ class Boleto implements BoletoInterface {
 	
     protected $saldoActual;
 
-    public function __construct($valor, $colectivo, $tarjeta) {
+    public function __construct($valor, $colectivo, $saldo) {
         $this->valor = $valor;
 	    $this->colectivo= $colectivo;
-	    $this->saldoActual= $tarjeta;
+	    $this->saldoActual= $saldo;
     }
 
     /**
