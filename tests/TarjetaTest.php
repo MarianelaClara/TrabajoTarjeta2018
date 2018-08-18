@@ -35,14 +35,38 @@ class TarjetaTest extends TestCase {
 
 
     }
+    public function testPlus(){
+		$cole= new Colectivo ("122 negro", 1, "Semtur");
+        $tarjeta=new Tarjeta;
+        $this->assertEquals($tarjeta->plus,0);
+        $this->assertEquals($tarjeta->obtenerSaldo(),0);
+        $cole->pagarCon($tarjeta);
+        $this->assertEquals($tarjeta->plus,1);
+        $this->assertEquals($tarjeta->obtenerSaldo(),($tarjeta->valor*-1));
+        $cole->pagarCon($tarjeta);
+        $this->assertEquals($tarjeta->plus,2);
+        $this->assertEquals($tarjeta->obtenerSaldo(),($tarjeta->valor*-1)*2);
+        $cole->pagarCon($tarjeta);
+        $this->assertEquals($tarjeta->plus,2);
+        $this->assertEquals($tarjeta->obtenerSaldo(),($tarjeta->valor*-2));
+        $tarjeta->recargar(10);
+        $this->assertEquals($tarjeta->plus,2);
+        $this->assertEquals($tarjeta->obtenerSaldo(),($tarjeta->valor*-2)+10);
+        $tarjeta->recargar(10);
+        $this->assertEquals($tarjeta->plus,1);
+        $this->assertEquals($tarjeta->obtenerSaldo(),($tarjeta->valor*-2)+20);
+        $tarjeta->recargar(10);
+        $this->assertEquals($tarjeta->plus,0);
+        $this->assertEquals($tarjeta->obtenerSaldo(),($tarjeta->valor*-2)+30);
+    }
 
     /**
      * Comprueba que la tarjeta no puede cargar saldos invalidos.
      */
     public function testCargaSaldoInvalido() {
-      $tarjeta = new Tarjeta;
+        $tarjeta = new Tarjeta;
 
-      $this->assertFalse($tarjeta->recargar(15));
-      $this->assertEquals($tarjeta->obtenerSaldo(), 0);
-  }
+        $this->assertFalse($tarjeta->recargar(15));
+        $this->assertEquals($tarjeta->obtenerSaldo(), 0);
+    }
 }
