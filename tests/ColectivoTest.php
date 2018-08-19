@@ -11,7 +11,7 @@ class ColectivoTest extends TestCase {
 		$this->assertEquals($cole->linea(), "122 negro");
   }
 
-  public function testPagarConSaldo() {
+ 	 public function testPagarConSaldo() {
 		$cole= new Colectivo ("122 negro", 1, "Semtur");
 		$tarjeta= new Tarjeta;
 		$tarjeta->recargar(10);
@@ -19,8 +19,30 @@ class ColectivoTest extends TestCase {
 		$boleto = new Boleto ($tarjeta->valor, $cole, ($tarjeta->saldo - $tarjeta->valor));
 		$this->assertEquals($cole->pagarCon($tarjeta), $boleto);
 	}
+
+	public function testJubilados(){
+		$tarjetaJub = new TarjetaJubilados;
+		$cole= new Colectivo ("122 negro", 1, "Semtur");
+		$this->assertEquals($tarjetaJub->obtenerSaldo(), 0);
+		$boleto = new Boleto($tarjetaJub->valor, $cole, $tarjetaJub->saldo);
+		$this->assertEquals($cole->pagarCon($tarjetaJub),$boleto);
+		$this->assertEquals($cole->pagarCon($tarjetaJub), $boleto);
+		$this->assertEquals($cole->pagarCon($tarjetaJub), $boleto);
+		$this->assertEquals($tarjetaJub->obtenerSaldo(), 0);
+	}
+	public function testPagarMedio(){
+		$tarjetaMedio = new TarjetaMedio;
+		$tarjeta = new Tarjeta;
+		$this->assertEquals($tarjeta->valor/2,$tarjetaMedio->valor);
+		$cole= new Colectivo ("122 negro", 1, "Semtur");
+		$tarjetaMedio->recargar(20);
+		$this->assertEquals($tarjetaMedio->obtenerSaldo(),20);
+		$boleto = new Boleto($tarjetaMedio->valor, $cole, $tarjetaMedio->obtenerSaldo()- $tarjetaMedio->valor);
+		$this->assertEquals($cole->pagarCon($tarjetaMedio), $boleto);
+		$this->assertEquals($tarjetaMedio->obtenerSaldo(),20-$tarjetaMedio->valor);
+	}
 		
-  public function testSinSaldo(){
+ 	 public function testSinSaldo(){
 		$cole= new Colectivo ("122 negro", 1, "Semtur");
 		$tarjeta= new Tarjeta;
 		$boleto = new Boleto ($tarjeta->valor, $cole, ($tarjeta->saldo - $tarjeta->valor));
