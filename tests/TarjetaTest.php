@@ -34,31 +34,26 @@ class TarjetaTest extends TestCase {
         $this->assertTrue($tarjeta->recargar(962.59));
         $this->assertEquals($tarjeta->obtenerSaldo(), 1986.25);
 
-
     }
+    public function testPagar(){
+        $tarjeta = new Tarjeta;
+        $tarjeta->recargar(20);
+        $this->assertTrue($tarjeta->pagar());
+        $this->assertEquals($tarjeta->obtenerSaldo(), 20-$tarjeta->obtenerValor());
+    }
+    
     public function testPlus(){
-		$cole= new Colectivo ("122 negro", 1, "Semtur");
-        $tarjeta=new Tarjeta;
-        $this->assertEquals($tarjeta->plus,0);
-        $this->assertEquals($tarjeta->obtenerSaldo(),0);
-        $cole->pagarCon($tarjeta);
-        $this->assertEquals($tarjeta->plus,1);
-        $this->assertEquals($tarjeta->obtenerSaldo(),($tarjeta->valor*-1));
-        $cole->pagarCon($tarjeta);
-        $this->assertEquals($tarjeta->plus,2);
-        $this->assertEquals($tarjeta->obtenerSaldo(),($tarjeta->valor*-1)*2);
-        $cole->pagarCon($tarjeta);
-        $this->assertEquals($tarjeta->plus,2);
-        $this->assertEquals($tarjeta->obtenerSaldo(),($tarjeta->valor*-2));
-        $tarjeta->recargar(10);
-        $this->assertEquals($tarjeta->plus,2);
-        $this->assertEquals($tarjeta->obtenerSaldo(),($tarjeta->valor*-2)+10);
-        $tarjeta->recargar(10);
-        $this->assertEquals($tarjeta->plus,1);
-        $this->assertEquals($tarjeta->obtenerSaldo(),($tarjeta->valor*-2)+20);
-        $tarjeta->recargar(10);
-        $this->assertEquals($tarjeta->plus,0);
-        $this->assertEquals($tarjeta->obtenerSaldo(),($tarjeta->valor*-2)+30);
+        $tarjeta = new Tarjeta;
+        $this->assertTrue($tarjeta->pagar());
+        $this->assertEquals($tarjeta->obtenerSaldo(), $tarjeta->obtenerValor() * -1);
+        $this->assertEquals($tarjeta->obtenerPlus(), 1);
+        $this->assertTrue($tarjeta->pagar());
+        $this->assertEquals($tarjeta->obtenerPlus(), 2);
+        $this->assertEquals($tarjeta->obtenerSaldo(), $tarjeta->obtenerValor() * -2);
+        $this->assertFalse($tarjeta->pagar());
+        $this->assertTrue($tarjeta->recargar(20));
+        $this->assertEquals($tarjeta->obtenerSaldo(), $tarjeta->obtenerValor() * -2+20);
+        $this->assertEquals($tarjeta->obtenerPlus(), 1);
     }
 
     /**

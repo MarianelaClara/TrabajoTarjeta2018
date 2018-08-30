@@ -7,7 +7,7 @@ class Tarjeta implements TarjetaInterface {
     protected $plus=0;
     protected $valor=14.80;
 
-    protected function recargar($monto) {
+    public function recargar($monto) {
       
       if ($monto == 10 || $monto == 20 || $monto == 30 || $monto == 50 || $monto == 100) {
         $this->saldo += $monto;
@@ -45,6 +45,10 @@ class Tarjeta implements TarjetaInterface {
 
     public function obtenerValor(){
       return $this->valor;
+    }
+
+    public function obtenerPlus(){
+      return $this->plus;
     }
 
     public function pagar(){
