@@ -3,5 +3,7 @@
 namespace TrabajoTarjeta;
 
 class TarjetaJubilados extends Tarjeta {
-    public $valor=0;
+    public function pagar(){
+        return TRUE;
+    }
 }

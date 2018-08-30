@@ -3,11 +3,10 @@
 namespace TrabajoTarjeta;
 
 class TarjetaMedio extends Tarjeta {
-    public $valor;
+    protected $valor;
 
     public function __construct() {
-        $orginal= (new tarjeta)->valor;
-        $this->valor=$orginal/2;
+        $this->valor= $this->obtenerValor()/2;
     }
 
 }

@@ -3,11 +3,11 @@
 namespace TrabajoTarjeta;
 
 class Tarjeta implements TarjetaInterface {
-    public $saldo;
-    public $plus=0;
-    public $valor=14.80;
+    protected $saldo=0;
+    protected $plus=0;
+    protected $valor=14.80;
 
-    public function recargar($monto) {
+    protected function recargar($monto) {
       
       if ($monto == 10 || $monto == 20 || $monto == 30 || $monto == 50 || $monto == 100) {
         $this->saldo += $monto;
@@ -41,6 +41,22 @@ class Tarjeta implements TarjetaInterface {
      */
     public function obtenerSaldo() {
       return $this->saldo;
+    }
+
+    public function obtenerValor(){
+      return $this->valor;
+    }
+
+    public function pagar(){
+      if($this->plus == 2)
+        return FALSE;
+      if($this->saldo >= $this->valor)
+        $this->saldo -= $this->valor;
+      else{
+        $this->saldo -= $this->valor;
+        $this->plus++;
+      }
+      return TRUE;
     }
 
 }
