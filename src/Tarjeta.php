@@ -6,7 +6,11 @@ class Tarjeta implements TarjetaInterface {
     protected $saldo=0;
     protected $plus=0;
     protected $valor=14.80;
+    protected $id;
 
+    public function __construct($id = 1) {
+      $this->id= $id;
+    }
     public function recargar($monto) {
       
       if ($monto == 10 || $monto == 20 || $monto == 30 || $monto == 50 || $monto == 100) {
@@ -41,6 +45,10 @@ class Tarjeta implements TarjetaInterface {
      */
     public function obtenerSaldo() {
       return $this->saldo;
+    }
+
+    public function obtenerId(){
+      return $this->id;
     }
 
     public function obtenerValor(){
