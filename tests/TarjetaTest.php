@@ -35,25 +35,39 @@ class TarjetaTest extends TestCase {
         $this->assertEquals($tarjeta->obtenerSaldo(), 1986.25);
 
     }
-    public function testPagar(){
+    public function testPagarNormal(){
         $tarjeta = new Tarjeta;
-        $tarjeta->recargar(20);
-        $this->assertTrue($tarjeta->pagar());
-        $this->assertEquals($tarjeta->obtenerSaldo(), 20-$tarjeta->obtenerValor());
+        $tarjeta->recargar(50);
+        $tarjeta->PagarNormal();
+        $this->assertEquals($tarjeta->obtenerSaldo(), 50-$tarjeta->obtenerValor());
+        $tarjeta->PagarNormal();
+        $this->assertEquals($tarjeta->obtenerSaldo(), 50-($tarjeta->obtenerValor())*2);
     }
     
-    public function testPlus(){
+    public function testUsarPlus(){
         $tarjeta = new Tarjeta;
-        $this->assertTrue($tarjeta->pagar());
-        $this->assertEquals($tarjeta->obtenerSaldo(), $tarjeta->obtenerValor() * -1);
+        $tarjeta->UsarPlus();
         $this->assertEquals($tarjeta->obtenerPlus(), 1);
-        $this->assertTrue($tarjeta->pagar());
+        $tarjeta->UsarPlus();
         $this->assertEquals($tarjeta->obtenerPlus(), 2);
-        $this->assertEquals($tarjeta->obtenerSaldo(), $tarjeta->obtenerValor() * -2);
-        $this->assertFalse($tarjeta->pagar());
-        $this->assertTrue($tarjeta->recargar(20));
-        $this->assertEquals($tarjeta->obtenerSaldo(), $tarjeta->obtenerValor() * -2+20);
-        $this->assertEquals($tarjeta->obtenerPlus(), 1);
+        
+    }
+
+    public function testPagarPlus(){
+    $tarjeta = new Tarjeta;
+    $tarjeta->UsarPlus();
+    $this->assertEquals($tarjeta->obtenerPlus(), 1);
+    $tarjeta->recargar(30);
+    $tarjeta->PagarPlus();
+    $this->assertEquals($tarjeta->obtenerSaldo(), 30-($tarjeta->obtenerValor() * 2));
+    $this->assertEquals($tarjeta->obtenerPlus(), 0);
+    $tarjeta->UsarPlus();
+    $tarjeta->UsarPlus();
+    $this->assertEquals($tarjeta->obtenerPlus(), 2);
+    $tarjeta->recargar(50);
+    $tarjeta->PagarPlus();
+    $this->assertEquals($tarjeta->obtenerSaldo(),50+(30-($tarjeta->obtenerValor() * 2))-($tarjeta->obtenerValor() * 3));
+    $this->assertEquals($tarjeta->obtenerPlus(), 0);
     }
 
     /**

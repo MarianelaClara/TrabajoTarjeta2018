@@ -44,26 +44,37 @@ class TarjetaMedioTest extends TestCase {
         $this->assertEquals($tarjetaMedio->obtenerSaldo(), 0);
     }
      
-    public function testPagar(){
+    public function testPagarMedio(){
         $tarjetaMedio = new TarjetaMedio;
-        $tarjetaMedio->recargar(20);
-        $this->assertTrue($tarjetaMedio->pagar());
-        $this->assertEquals($tarjetaMedio->obtenerSaldo(), 20-$tarjetaMedio->obtenerValor());
+        $tarjetaMedio->recargar(50);
+        $tarjetaMedio->PagarNormal();
+        $this->assertEquals($tarjetaMedio->obtenerSaldo(), 50-$tarjetaMedio->obtenerValor());
+        $tarjetaMedio->PagarNormal();
+        $this->assertEquals($tarjetaMedio->obtenerSaldo(), 50-($tarjetaMedio->obtenerValor())*2);
     }
     
-    public function testPlus(){
+    public function testUsarPlusMedio(){
         $tarjetaMedio = new TarjetaMedio;
-        $this->assertTrue($tarjetaMedio->pagar());
-        $this->assertEquals($tarjetaMedio->obtenerSaldo(), $tarjetaMedio->obtenerValor() * -1);
+        $tarjetaMedio->UsarPlus();
         $this->assertEquals($tarjetaMedio->obtenerPlus(), 1);
-        $this->assertTrue($tarjetaMedio->pagar());
+        $tarjetaMedio->UsarPlus();
         $this->assertEquals($tarjetaMedio->obtenerPlus(), 2);
-        $this->assertEquals($tarjetaMedio->obtenerSaldo(), $tarjetaMedio->obtenerValor() * -2);
-        $this->assertFalse($tarjetaMedio->pagar());
-        $this->assertTrue($tarjetaMedio->recargar(10));
-        $this->assertEquals($tarjetaMedio->obtenerSaldo(), $tarjetaMedio->obtenerValor() * -2+10);
-        $this->assertEquals($tarjetaMedio->obtenerPlus(), 1);
+       
     }
-
-
+    public function testPagarPlusMedio(){
+        $tarjetaMedio = new TarjetaMedio;
+        $tarjetaMedio->UsarPlus();
+        $this->assertEquals($tarjetaMedio->obtenerPlus(), 1);
+        $tarjetaMedio->recargar(30);
+        $tarjetaMedio->PagarPlus();
+        $this->assertEquals($tarjetaMedio->obtenerSaldo(), 30-($tarjetaMedio->obtenerValor() * 2));
+        $this->assertEquals($tarjetaMedio->obtenerPlus(), 0);
+        $tarjetaMedio->UsarPlus();
+        $tarjetaMedio->UsarPlus();
+        $this->assertEquals($tarjetaMedio->obtenerPlus(), 2);
+        $tarjetaMedio->recargar(50);
+        $tarjetaMedio->PagarPlus();
+        $this->assertEquals($tarjetaMedio->obtenerSaldo(),50+(30-($tarjetaMedio->obtenerValor() * 2))-($tarjetaMedio->obtenerValor() * 3));
+        $this->assertEquals($tarjetaMedio->obtenerPlus(), 0);
+    }
 }

@@ -64,6 +64,7 @@ class Tarjeta implements TarjetaInterface {
         $this->saldo -= ($this->valor *2);
       else
       $this->saldo -= ($this->valor *3);
+      $this->plus = 0;
     }
 
 }
