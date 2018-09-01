@@ -19,7 +19,7 @@ class TarjetaMedioUni extends Tarjeta {
  
     public function actualizarDia($diaNuevo){
         $this->diaDeUso= $diaNuevo;
-        $this->usoDeMedio=1;
+        $this->usoDeMedio=0;
     }
 
     public function obtenerDiaDeUso(){
