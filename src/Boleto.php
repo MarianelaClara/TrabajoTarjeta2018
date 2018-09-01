@@ -4,22 +4,24 @@ namespace TrabajoTarjeta;
 
 class Boleto implements BoletoInterface {
 
+    protected $pagaPlus;
     protected $valor;
     protected $idTarjeta;
     protected $tipoTarjeta;
     protected $saldoActual;
-    protected $plus;
+    protected $tipoBoleto;
     protected $linea;
     protected $empresa;
     protected $numeroColectivo;
     protected $fecha;
 
-    public function __construct($valor, $idTarjeta, $tipoTarjeta, $saldoActual, $plus, $linea, $empresa, $numeroColectivo, $fecha) {
+    public function __construct($pagaPlus, $valor, $idTarjeta, $tipoTarjeta, $saldoActual, $tipoBoleto, $linea, $empresa, $numeroColectivo, $fecha) {
+        $this->pagaPlus= $pagaPlus;
         $this->valor = $valor;
         $this->idTarjeta= $idTarjeta;
         $this->tipoTarjeta= $tipoTarjeta;
         $this->saldoActual= $saldoActual;
-        $this->plus= $plus;
+        $this->tipoBoleto= $tipoBoleto;
         $this->linea= $linea;
         $this->empresa= $empresa;
         $this->numeroColectivo= $numeroColectivo;
@@ -47,8 +49,8 @@ class Boleto implements BoletoInterface {
         return $this->saldoActual;
     }
 
-    public function obtenerPlus(){
-        return $this->plus;
+    public function obtenerTipoBoleto(){
+        return $this->tipoBoleto;
     }
 
     public function obtenerLinea(){

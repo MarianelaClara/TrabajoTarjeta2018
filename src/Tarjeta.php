@@ -15,22 +15,14 @@ class Tarjeta implements TarjetaInterface {
       
       if ($monto == 10 || $monto == 20 || $monto == 30 || $monto == 50 || $monto == 100) {
         $this->saldo += $monto;
-        if($this->saldo>=($this->valor * -1) && $this->plus==2){
-          $this->plus--;
-        }
-        if($this->saldo>=0){
-         $this->plus=0;
-        }
 	      return TRUE;
       }
 
       if ($monto == 510.15) {
         $this->saldo += ($monto + 81.93);
-        $this->plus=0;
         	return TRUE;
       }
       if ($monto == 962.59) {
-        $this->plus=0;
 	      $this->saldo += ($monto + 221.58);
 	      return TRUE;
       }
@@ -59,16 +51,19 @@ class Tarjeta implements TarjetaInterface {
       return $this->plus;
     }
 
-    public function pagar(){
-      if($this->plus == 2)
-        return FALSE;
-      if($this->saldo >= $this->valor)
-        $this->saldo -= $this->valor;
-      else{
-        $this->saldo -= $this->valor;
-        $this->plus++;
-      }
-      return TRUE;
+    public function pagarNormal(){
+      $this->saldo -= $this->valor;
+    
+    }
+    public function usarPlus(){
+      $this->plus ++;
+    
+    }
+    public function pagarPlus(){
+      if($this->plus == 1)
+        $this->saldo -= ($this->valor *2);
+      else
+      $this->saldo -= ($this->valor *3);
     }
 
 }
