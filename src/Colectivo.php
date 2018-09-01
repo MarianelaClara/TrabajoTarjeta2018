@@ -67,37 +67,79 @@ class Colectivo implements ColectivoInterface {
 				return FALSE;
 			}
 		}
-		/*if($tarjeta instanceof TarjetaMedioUni){
-			if($tarjeta->obtenerPlus() ==0 ){
-				if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()){
-					$tarjeta->pagarNormal();
-					return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
+		if($tarjeta instanceof TarjetaMedioUni){
+			$diaActual= date(“d”, date("d/m/Y H:i:s", $tiempo->tiempo()));
+			if($diaActual==$tarjeta->obtenerDiaDeUso()){
+				if($tarjeta->obtenerUsoDeMedio()!=2){
+					if($tarjeta->obtenerPlus() ==0 ){
+						if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()){
+							$tarjeta->pagarNormal();
+							return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "MedioUni", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
+						}
+						else{
+							$tarjeta->usarPlus();
+							return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "MedioUni", $tarjeta->obtenerSaldo(), "Primer Plus", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
+						}
+					}
+					if($tarjeta->obtenerPlus() == 1){
+						if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*2){
+							$tarjeta->pagarPlus();
+							return new Boleto("Paga 1 plus", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "MedioUni", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
+						}
+						else{
+							$tarjeta->usarPlus();
+							return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "MedioUni", $tarjeta->obtenerSaldo(), "Segundo Plus", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
+						}
+					}
+					if($tarjeta->obtenerPlus() == 2){
+						if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*3){
+							$tarjeta->pagarPlus();
+							return new Boleto("Paga 2 plus", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "MedioUni", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
+						}
+						else{
+							return FALSE;
+						}
+					}
 				}
 				else{
-					$tarjeta->usarPlus();
-					return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Primer Plus", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
+					if($tarjeta->obtenerPlus() ==0 ){
+						if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()){
+							$tarjeta->pagarNormal();
+							$tarjeta->pagarNormal();
+							return new Boleto("", $tarjeta->obtenerValor()*2, $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
+						}
+						else{
+							$tarjeta->usarPlus();
+							return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Primer Plus", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
+						}
+					}
+					if($tarjeta->obtenerPlus() == 1){
+						if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*2){
+							$tarjeta->pagarPlus();
+							$tarjeta->pagarNormal();
+							return new Boleto("Paga 1 plus", $tarjeta->obtenerValor()*2, $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
+						}
+						else{
+							$tarjeta->usarPlus();
+							return new Boleto("", $tarjeta->obtenerValor()*2, $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Segundo Plus", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
+						}
+					}
+					if($tarjeta->obtenerPlus() == 2){
+						if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*3){
+							$tarjeta->pagarPlus();
+							$tarjeta->pagarNormal();
+							return new Boleto("Paga 2 plus", $tarjeta->obtenerValor()*2, $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
+						}
+						else{
+							return FALSE;
+						}
+					}
 				}
 			}
-			if($tarjeta->obtenerPlus() == 1){
-				if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*2){
-					$tarjeta->pagarPlus();
-					return new Boleto("Paga 1 plus", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
-				}
-				else{
-					$tarjeta->usarPlus();
-					return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Segundo Plus", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
-				}
+			else{
+				$tarjeta->actualizarDia($diaActual);
 			}
-			if($tarjeta->obtenerPlus() == 2){
-				if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*3){
-					$tarjeta->pagarPlus();
-					return new Boleto("Paga 2 plus", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
-				}
-				else{
-					return FALSE;
-				}
-			}
-		}*/
+		}
 		if($tarjeta instanceof TarjetaJubilados){
 			return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Jubilado", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
 		}
