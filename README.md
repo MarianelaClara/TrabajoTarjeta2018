@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/MarianelaClara/TrabajoTarjeta2018.svg?branch=master)](https://travis-ci.org/MarianelaClara/TrabajoTarjeta2018)
 
+[![Coverage Status](https://coveralls.io/repos/github/MarianelaClara/TrabajoTarjeta2018/badge.svg?branch=master)](https://coveralls.io/github/MarianelaClara/TrabajoTarjeta2018?branch=master)
+
 ## Trabajo Tarjeta: Versión 2018
 
 El siguiente trabajo es un enunciado iterativo. Todas las semanas nuevos
