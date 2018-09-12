@@ -16,6 +16,6 @@ interface BoletoInterface {
      *
      * @return ColectivoInterface
      */
-    public function obtenerColectivo();
+
 
 }
