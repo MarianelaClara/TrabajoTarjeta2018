@@ -22,8 +22,8 @@ class ColectivoTest extends TestCase {
 
 	public function testSinPlusMedio(){
 		$cole= new Colectivo ("122 negro", 1, "Semtur");
-		$tarjeta= new TarjetaMedio(1);
-		$tiempo = new TiempoFalso;
+		$tarjeta= new TarjetaMedio();
+		$tiempo = new TiempoFalso(60*5);
 		$tarjeta->usarPlus();
 		$tarjeta->usarPlus();
 		$this->assertFalse($cole->pagarCon($tarjeta, $tiempo));
@@ -238,6 +238,14 @@ class ColectivoTest extends TestCase {
 		$cole->pagarCon($tarjetaMedioUni,$tiempo);
 		$this->assertEquals($tarjetaMedioUni->obtenerUsoDeMedio(),1);
 		$this->assertEquals($tarjetaMedioUni->obtenerSaldo(),50-$tarjetaMedioUni->obtenerValor()*5);
+	}
+
+	public function testPrimerPlusMedio(){
+		$tarjetaMedio = new TarjetaMedio;
+		$cole= new Colectivo ("122 negro", 1, "Semtur");
+		$tiempo= new TiempoFalso(5*60);
+		$boleto= new Boleto("", $tarjetaMedio->obtenerValor(), $tarjetaMedio->obtenerId(), "Medio", $tarjetaMedio->obtenerSaldo(), "Primer Plus", $cole->linea(), $cole->empresa(), $cole->numero(), date("d/m/Y H:i:s", $tiempo->tiempo()));
+		$this->assertEquals($cole->pagarCon($tarjetaMedio, $tiempo), $boleto);
 	}
 
 }
