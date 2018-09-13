@@ -108,7 +108,7 @@ class Colectivo implements ColectivoInterface {
 				}
 				else{
 					if($tarjeta->obtenerPlus() ==0 ){
-						if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()){
+						if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*2){
 							$tarjeta->pagarNormal();
 							$tarjeta->pagarNormal();
 							return new Boleto("", $tarjeta->obtenerValor()*2, $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
@@ -122,6 +122,7 @@ class Colectivo implements ColectivoInterface {
 						if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*3){
 							$tarjeta->pagarPlus();
 							$tarjeta->pagarNormal();
+							$tarjeta->pagarNormal();
 							return new Boleto("Paga 1 plus", $tarjeta->obtenerValor()*2, $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
 						}
 						else{
@@ -132,6 +133,7 @@ class Colectivo implements ColectivoInterface {
 					if($tarjeta->obtenerPlus() == 2){
 						if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*4){
 							$tarjeta->pagarPlus();
+							$tarjeta->pagarNormal();
 							$tarjeta->pagarNormal();
 							return new Boleto("Paga 2 plus", $tarjeta->obtenerValor()*2, $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
 						}
