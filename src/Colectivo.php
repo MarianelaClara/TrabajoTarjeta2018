@@ -41,8 +41,9 @@ class Colectivo implements ColectivoInterface {
 					}
 				}
 				if($tarjeta->obtenerPlus() == 1){
-					if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*2){
+					if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*3){
 						$tarjeta->pagarPlus();
+						$tarjeta->pagarNormal();
 						$tarjeta->ultimoViaje= $tiempo->tiempo();
 						return new Boleto("Paga 1 plus", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Medio", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
 					}
@@ -53,8 +54,10 @@ class Colectivo implements ColectivoInterface {
 					}
 				}
 				if($tarjeta->obtenerPlus() == 2){
-					if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*3){
+					if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*5){
 						$tarjeta->pagarPlus();
+						$tarjeta->pagarNormal();
+						$tarjeta->pagarNormal();
 						$tarjeta->ultimoViaje= $tiempo->tiempo();
 						return new Boleto("Paga 2 plus", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Medio", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
 					}
@@ -79,25 +82,26 @@ class Colectivo implements ColectivoInterface {
 						}
 						else{
 							$tarjeta->usarPlus();
-							$tarjeta->usarMedio();
-							return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "MedioUni", $tarjeta->obtenerSaldo(), "Primer Plus", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
+							return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Primer Plus", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
 						}
 					}
 					if($tarjeta->obtenerPlus() == 1){
-						if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*2){
+						if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*3){
 							$tarjeta->pagarPlus();
 							$tarjeta->usarMedio();
+							$tarjeta->pagarNormal();
 							return new Boleto("Paga 1 plus", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "MedioUni", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
 						}
 						else{
 							$tarjeta->usarPlus();
-							$tarjeta->usarMedio();
-							return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "MedioUni", $tarjeta->obtenerSaldo(), "Segundo Plus", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
+							return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Segundo Plus", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
 						}
 					}
 					if($tarjeta->obtenerPlus() == 2){
-						if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*3){
+						if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*5){
 							$tarjeta->pagarPlus();
+							$tarjeta->pagarNormal();
+							$tarjeta->pagarNormal();
 							$tarjeta->usarMedio();
 							return new Boleto("Paga 2 plus", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "MedioUni", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
 						}
@@ -115,11 +119,11 @@ class Colectivo implements ColectivoInterface {
 						}
 						else{
 							$tarjeta->usarPlus();
-							return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "MedioUni", $tarjeta->obtenerSaldo(), "Primer Plus", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
+							return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Primer Plus", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
 						}
 					}
 					if($tarjeta->obtenerPlus() == 1){
-						if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*3){
+						if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*4){
 							$tarjeta->pagarPlus();
 							$tarjeta->pagarNormal();
 							$tarjeta->pagarNormal();
@@ -127,12 +131,13 @@ class Colectivo implements ColectivoInterface {
 						}
 						else{
 							$tarjeta->usarPlus();
-							return new Boleto("", $tarjeta->obtenerValor()*2, $tarjeta->obtenerId(), "MedioUni", $tarjeta->obtenerSaldo(), "Segundo Plus", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
+							return new Boleto("", $tarjeta->obtenerValor()*2, $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Segundo Plus", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
 						}
 					}
 					if($tarjeta->obtenerPlus() == 2){
-						if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*4){
+						if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*6){
 							$tarjeta->pagarPlus();
+							$tarjeta->pagarNormal();
 							$tarjeta->pagarNormal();
 							$tarjeta->pagarNormal();
 							return new Boleto("Paga 2 plus", $tarjeta->obtenerValor()*2, $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
@@ -153,25 +158,26 @@ class Colectivo implements ColectivoInterface {
 					}
 					else{
 						$tarjeta->usarPlus();
-						$tarjeta->usarMedio();
-						return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "MedioUni", $tarjeta->obtenerSaldo(), "Primer Plus", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
+						return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Primer Plus", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
 					}
 				}
 				if($tarjeta->obtenerPlus() == 1){
-					if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*2){
+					if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*3){
 						$tarjeta->pagarPlus();
+						$tarjeta->pagarNormal();
 						$tarjeta->usarMedio();
 						return new Boleto("Paga 1 plus", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "MedioUni", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
 					}
 					else{
 						$tarjeta->usarPlus();
-						$tarjeta->usarMedio();
-						return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "MedioUni", $tarjeta->obtenerSaldo(), "Segundo Plus", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
+						return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Segundo Plus", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
 					}
 				}
 				if($tarjeta->obtenerPlus() == 2){
-					if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*3){
+					if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*5){
 						$tarjeta->pagarPlus();
+						$tarjeta->pagarNormal();
+						$tarjeta->pagarNormal();
 						$tarjeta->usarMedio();
 						return new Boleto("Paga 2 plus", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "MedioUni", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
 					}
