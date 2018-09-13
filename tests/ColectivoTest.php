@@ -331,10 +331,10 @@ class ColectivoTest extends TestCase {
 		$this->assertEquals($tarjetaMedioUni->obtenerUsoDeMedio(), 2);
 		$tiempo->avanzar(24*60*60);
 		$this->assertEquals($tarjetaMedioUni->obtenerPlus(), 1);
-		$this->assertEquals($tarjetaMedioUni->obtenerUsoDeMedio(), 0);
 		$tarjetaMedioUni->recargar(30);
 		$boleto= new Boleto("Paga 1 plus", $tarjetaMedioUni->obtenerValor(), $tarjetaMedioUni->obtenerId(), "MedioUni", $tarjetaMedioUni->obtenerSaldo()-$tarjetaMedioUni->obtenerValor()*3, "Normal", $cole->linea(), $cole->empresa(), $cole->numero(), date("d/m/Y H:i:s", $tiempo->tiempo()));
 		$this->assertEquals($cole->pagarCon($tarjetaMedioUni, $tiempo), $boleto);
+		$this->assertEquals($tarjetaMedioUni->obtenerUsoDeMedio(), 1);
 	}
 
 	public function testUsarSegundoPlusNuevoDiaMedioUni(){
@@ -348,9 +348,9 @@ class ColectivoTest extends TestCase {
 		$this->assertEquals($tarjetaMedioUni->obtenerPlus(), 1);
 		$this->assertEquals($tarjetaMedioUni->obtenerUsoDeMedio(), 2);
 		$tiempo->avanzar(24*60*60);
-		$this->assertEquals($tarjetaMedioUni->obtenerUsoDeMedio(), 0);
 		$boleto = new Boleto("", $tarjetaMedioUni->obtenerValor(), $tarjetaMedioUni->obtenerId(), "Normal", $tarjetaMedioUni->obtenerSaldo(), "Segundo Plus", $cole->linea(), $cole->empresa(), $cole->numero(), date("d/m/Y H:i:s", $tiempo->tiempo()));
 		$this->assertEquals($cole->pagarCon($tarjetaMedioUni, $tiempo), $boleto);
+		$this->assertEquals($tarjetaMedioUni->obtenerUsoDeMedio(), 0);
 	}
 
 	public function testPagarSegundoPlusNuevoDiaMedioUni(){
@@ -363,10 +363,8 @@ class ColectivoTest extends TestCase {
 		$this->assertEquals($tarjetaMedioUni->obtenerUsoDeMedio(), 2);
 		$cole->pagarCon($tarjetaMedioUni, $tiempo);
 		$this->assertEquals($tarjetaMedioUni->obtenerPlus(), 1);
-		$this->assertEquals($tarjetaMedioUni->obtenerUsoDeMedio(), 0);
 		$cole->pagarCon($tarjetaMedioUni, $tiempo);
 		$this->assertEquals($tarjetaMedioUni->obtenerPlus(), 2);
-		$this->assertEquals($tarjetaMedioUni->obtenerUsoDeMedio(), 0);
 		$tiempo->avanzar(24*60*60);
 		$tarjetaMedioUni->recargar(50);
 		$boleto= new Boleto("Paga 2 plus", $tarjetaMedioUni->obtenerValor(), $tarjetaMedioUni->obtenerId(), "MedioUni", $tarjetaMedioUni->obtenerSaldo()-$tarjetaMedioUni->obtenerValor()*5, "Normal", $cole->linea(), $cole->empresa(), $cole->numero(), date("d/m/Y H:i:s", $tiempo->tiempo()));
@@ -385,10 +383,8 @@ class ColectivoTest extends TestCase {
 		$this->assertEquals($tarjetaMedioUni->obtenerUsoDeMedio(), 2);
 		$cole->pagarCon($tarjetaMedioUni, $tiempo);
 		$this->assertEquals($tarjetaMedioUni->obtenerPlus(), 1);
-		$this->assertEquals($tarjetaMedioUni->obtenerUsoDeMedio(), 0);
 		$cole->pagarCon($tarjetaMedioUni, $tiempo);
 		$this->assertEquals($tarjetaMedioUni->obtenerPlus(), 2);
-		$this->assertEquals($tarjetaMedioUni->obtenerUsoDeMedio(), 0);
 		$tiempo->avanzar(24*60*60);
 		$this->assertFalse($cole->pagarCon($tarjetaMedioUni, $tiempo));
 	}
