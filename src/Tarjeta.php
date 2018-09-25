@@ -8,8 +8,9 @@ class Tarjeta implements TarjetaInterface {
     protected $valor=14.80;
     protected $id;
     protected $transbordo=0;
-    protected $viajeTransbordo;
-    protected $limiteTransbordo;
+    protected $viajeTransbordo=0;
+    protected $ultimoCole;
+    protected $limiteTransbordo=0;
 
     public function __construct($id = 1) {
       $this->id= $id;
@@ -37,13 +38,30 @@ class Tarjeta implements TarjetaInterface {
       return $this->transbordo;
     }
 
-    public function obtenerLimite(){
-      return $this->limiteTransbordo();
+    public function usarTransbordo(){
+      $this->transbordo ++;
     }
 
-    public function actualizarViaje($fecha){
-      $this->viajeTransbordo= $fecha;
-      $this->limiteTransbordo= $fecha + 60*60;
+    public function resetTransbordo(){
+      $this->transbordo=0;
+    }
+    
+    public function pagarTransbordo(){
+      $this->saldo -= ($this->valor*33)/100;
+    }
+
+    public function obtenerUltimoCole(){
+      return $this->ultimoCole;
+    }
+
+    public function obtenerLimite(){
+      return $this->limiteTransbordo;
+    }
+
+    public function actualizarViaje($fecha, $cole){
+      $this->viajeTransbordo= date("d/m/Y H:i:s", $fecha);
+      $this->ultimoCole= $cole;
+      $this->limiteTransbordo= date("d/m/Y H:i:s", $fecha+60*60);
     }
 
 

@@ -192,7 +192,14 @@ class Colectivo implements ColectivoInterface {
 		}
 		else{
 			if($tarjeta->obtenerPlus() ==0 ){
+				if($tarjeta->obtenerTransbordo()==0 && $tarjeta->obtenerUltimoCole()!= $this->linea && $tarjeta->obtenerLimite() > $tiempo->tiempo()){
+					$tarjeta->usarTransbordo();
+					$tarjeta->pagarTransbordo();
+					return new Boleto("", ($tarjeta->obtenerValor()*33)/100, $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Transbordo", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
+				}
 				if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()){
+					$tarjeta->resetTransbordo();
+					$tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea);
 					$tarjeta->pagarNormal();
 					return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
 				}
