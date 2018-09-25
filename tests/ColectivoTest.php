@@ -389,6 +389,21 @@ class ColectivoTest extends TestCase {
 		$this->assertFalse($cole->pagarCon($tarjetaMedioUni, $tiempo));
 	}
 
+	public function testTransbordoNormal(){
+		$tarjeta= new Tarjeta;
+		$cole= new Colectivo ("122 negro", 1, "Semtur");
+		$tiempo= new TiempoFalso;
+		$tarjeta->recargar(100);
+		$boleto= new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo() - $tarjeta->obtenerValor(), "Normal", $cole->linea(), $cole->empresa(), $cole->numero(), date("d/m/Y H:i:s", $tiempo->tiempo()));
+		$this->assertEquals($cole->pagarCon($tarjeta, $tiempo), $boleto);
+		$tiempo->avanzar(10);
+		$cole2= new Colectivo ("121 negro", 1, "Semtur");
+		$boleto2= new Boleto("", (($tarjeta->obtenerValor()*33)/100), $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo()-($tarjeta->obtenerValor()*33)/100, "Transbordo", $cole2->linea(), $cole2->empresa(), $cole2->numero(), date("d/m/Y H:i:s", $tiempo->tiempo()));
+		$this->assertEquals($cole2->pagarCon($tarjeta, $tiempo), $boleto2);
+		$boleto= new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo() - $tarjeta->obtenerValor(), "Normal", $cole->linea(), $cole->empresa(), $cole->numero(), date("d/m/Y H:i:s", $tiempo->tiempo()));
+		$this->assertEquals($cole->pagarCon($tarjeta, $tiempo), $boleto);
+	}
+
 
 
 }
