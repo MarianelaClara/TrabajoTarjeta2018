@@ -7,6 +7,9 @@ class Tarjeta implements TarjetaInterface {
     protected $plus=0;
     protected $valor=14.80;
     protected $id;
+    protected $transbordo=0;
+    protected $viajeTransbordo;
+    protected $limiteTransbordo;
 
     public function __construct($id = 1) {
       $this->id= $id;
@@ -29,6 +32,20 @@ class Tarjeta implements TarjetaInterface {
 
       return FALSE;
     }
+
+    public function obtenerTransbordo(){
+      return $this->transbordo;
+    }
+
+    public function obtenerLimite(){
+      return $this->limiteTransbordo();
+    }
+
+    public function actualizarViaje($fecha){
+      $this->viajeTransbordo= $fecha;
+      $this->limiteTransbordo= $fecha + 60*60;
+    }
+
 
     /**
      * Devuelve el saldo que le queda a la tarjeta.
