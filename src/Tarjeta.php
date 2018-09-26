@@ -104,9 +104,9 @@ class Tarjeta implements TarjetaInterface {
     }
     public function pagarPlus(){
       if($this->plus == 1)
-        $this->saldo -= ($this->valor *2);
+        $this->saldo -= ($this->valor);
       else
-      $this->saldo -= ($this->valor *3);
+      $this->saldo -= ($this->valor *2);
       $this->plus = 0;
     }
 

@@ -25,4 +25,7 @@ class TarjetaMedioUni extends Tarjeta {
     public function obtenerDiaDeUso(){
         return $this->diaDeUso;
     }
+    public function normalTransbordo(){
+        $this->saldo -= ($this->valor*2)*33/100;
+    }
 }

@@ -67,14 +67,14 @@ class TarjetaMedioTest extends TestCase {
         $this->assertEquals($tarjetaMedio->obtenerPlus(), 1);
         $tarjetaMedio->recargar(30);
         $tarjetaMedio->PagarPlus();
-        $this->assertEquals($tarjetaMedio->obtenerSaldo(), 30-($tarjetaMedio->obtenerValor() * 2));
+        $this->assertEquals($tarjetaMedio->obtenerSaldo(), 30-($tarjetaMedio->obtenerValor()));
         $this->assertEquals($tarjetaMedio->obtenerPlus(), 0);
         $tarjetaMedio->UsarPlus();
         $tarjetaMedio->UsarPlus();
         $this->assertEquals($tarjetaMedio->obtenerPlus(), 2);
         $tarjetaMedio->recargar(50);
         $tarjetaMedio->PagarPlus();
-        $this->assertEquals($tarjetaMedio->obtenerSaldo(),50+(30-($tarjetaMedio->obtenerValor() * 2))-($tarjetaMedio->obtenerValor() * 3));
+        $this->assertEquals($tarjetaMedio->obtenerSaldo(),50+(30-($tarjetaMedio->obtenerValor()))-($tarjetaMedio->obtenerValor() *2));
         $this->assertEquals($tarjetaMedio->obtenerPlus(), 0);
     }
 }

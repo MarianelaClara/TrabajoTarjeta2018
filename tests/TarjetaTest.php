@@ -59,14 +59,14 @@ class TarjetaTest extends TestCase {
     $this->assertEquals($tarjeta->obtenerPlus(), 1);
     $tarjeta->recargar(30);
     $tarjeta->PagarPlus();
-    $this->assertEquals($tarjeta->obtenerSaldo(), 30-($tarjeta->obtenerValor() * 2));
+    $this->assertEquals($tarjeta->obtenerSaldo(), 30-($tarjeta->obtenerValor()));
     $this->assertEquals($tarjeta->obtenerPlus(), 0);
     $tarjeta->UsarPlus();
     $tarjeta->UsarPlus();
     $this->assertEquals($tarjeta->obtenerPlus(), 2);
     $tarjeta->recargar(50);
     $tarjeta->PagarPlus();
-    $this->assertEquals($tarjeta->obtenerSaldo(),50+(30-($tarjeta->obtenerValor() * 2))-($tarjeta->obtenerValor() * 3));
+    $this->assertEquals($tarjeta->obtenerSaldo(),50+(30-($tarjeta->obtenerValor()))-($tarjeta->obtenerValor() * 2));
     $this->assertEquals($tarjeta->obtenerPlus(), 0);
     }
 
