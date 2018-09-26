@@ -404,6 +404,86 @@ class ColectivoTest extends TestCase {
 		$this->assertEquals($cole->pagarCon($tarjeta, $tiempo), $boleto);
 	}
 
+	public function testTransbordoNormalPrimerPlus(){
+		$tarjeta= new Tarjeta;
+		$cole= new Colectivo ("122 negro", 1, "Semtur");
+		$tiempo= new TiempoFalso;
+		$tarjeta->recargar(20);
+		$cole->pagarCon($tarjeta, $tiempo);
+		$cole->pagarCon($tarjeta, $tiempo);
+		$tiempo->avanzar(10);
+		$tarjeta->recargar(100);
+		$cole2= new Colectivo ("121 negro", 1, "Semtur");
+		$boleto2= new Boleto("Paga 1 plus", (($tarjeta->obtenerValor()*33)/100), $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo()-($tarjeta->obtenerValor()*33)/100-$tarjeta->obtenerValor(), "Transbordo", $cole2->linea(), $cole2->empresa(), $cole2->numero(), date("d/m/Y H:i:s", $tiempo->tiempo()));
+		$this->assertEquals($cole2->pagarCon($tarjeta, $tiempo), $boleto2);
+	}
+
+	public function testTransbordoNormalSegundoPlus(){
+		$tarjeta= new Tarjeta;
+		$cole= new Colectivo ("122 negro", 1, "Semtur");
+		$tiempo= new TiempoFalso;
+		$tarjeta->recargar(20);
+		$cole->pagarCon($tarjeta, $tiempo);
+		$cole->pagarCon($tarjeta, $tiempo);
+		$cole->pagarCon($tarjeta, $tiempo);
+		$tiempo->avanzar(10);
+		$tarjeta->recargar(100);
+		$cole2= new Colectivo ("121 negro", 1, "Semtur");
+		$boleto2= new Boleto("Paga 2 plus", (($tarjeta->obtenerValor()*33)/100), $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo()-($tarjeta->obtenerValor()*33)/100-$tarjeta->obtenerValor()*2, "Transbordo", $cole2->linea(), $cole2->empresa(), $cole2->numero(), date("d/m/Y H:i:s", $tiempo->tiempo()));
+		$this->assertEquals($cole2->pagarCon($tarjeta, $tiempo), $boleto2);
+	}
+
+	public function testTransbordoMedio(){
+		$tarjetaMedio= new TarjetaMedio;
+		$cole= new Colectivo ("122 negro", 1, "Semtur");
+		$tiempo= new TiempoFalso;
+		$tiempo->avanzar(60*60);
+		$tarjetaMedio->recargar(100);
+		$boleto= new Boleto("", $tarjetaMedio->obtenerValor(), $tarjetaMedio->obtenerId(), "Medio", $tarjetaMedio->obtenerSaldo() - $tarjetaMedio->obtenerValor(), "Normal", $cole->linea(), $cole->empresa(), $cole->numero(), date("d/m/Y H:i:s", $tiempo->tiempo()));
+		$this->assertEquals($cole->pagarCon($tarjetaMedio, $tiempo), $boleto);
+		$tiempo->avanzar(60*60);
+		$cole2= new Colectivo ("121 negro", 1, "Semtur");
+		$boleto2= new Boleto("", (($tarjetaMedio->obtenerValor()*33)/100), $tarjetaMedio->obtenerId(), "Medio", $tarjetaMedio->obtenerSaldo()-($tarjetaMedio->obtenerValor()*33)/100, "Transbordo", $cole2->linea(), $cole2->empresa(), $cole2->numero(), date("d/m/Y H:i:s", $tiempo->tiempo()));
+		$this->assertEquals($cole2->pagarCon($tarjetaMedio, $tiempo), $boleto2);
+		$boleto= new Boleto("", $tarjetaMedio->obtenerValor(), $tarjetaMedio->obtenerId(), "Medio", $tarjetaMedio->obtenerSaldo() - $tarjetaMedio->obtenerValor(), "Normal", $cole->linea(), $cole->empresa(), $cole->numero(), date("d/m/Y H:i:s", $tiempo->tiempo()));
+		$this->assertEquals($cole->pagarCon($tarjetaMedio, $tiempo), $boleto);
+	}
+
+	public function testTransbordoMedioPrimerPlus(){
+		$tarjeta= new TarjetaMedio;
+		$cole= new Colectivo ("122 negro", 1, "Semtur");
+		$tiempo= new TiempoFalso;
+		$tiempo->avanzar(60*5);
+		$tarjeta->recargar(10);
+		$cole->pagarCon($tarjeta, $tiempo);
+		$tiempo->avanzar(60*5);
+		$cole->pagarCon($tarjeta, $tiempo);
+		$this->assertEquals($tarjeta->obtenerPlus(), 1);
+		$tiempo->avanzar(60*5);
+		$tarjeta->recargar(100);
+		$cole2= new Colectivo ("121 negro", 1, "Semtur");
+		$boleto2= new Boleto("Paga 1 plus", (($tarjeta->obtenerValor()*33)/100), $tarjeta->obtenerId(), "Medio", $tarjeta->obtenerSaldo()-($tarjeta->obtenerValor()*33)/100-$tarjeta->obtenerValor()*2, "Transbordo", $cole2->linea(), $cole2->empresa(), $cole2->numero(), date("d/m/Y H:i:s", $tiempo->tiempo()));
+		$this->assertEquals($cole2->pagarCon($tarjeta, $tiempo), $boleto2);
+	}
+
+	public function testTransbordoMedioSegundoPlus(){
+		$tarjeta= new TarjetaMedio;
+		$cole= new Colectivo ("122 negro", 1, "Semtur");
+		$tiempo= new TiempoFalso;
+		$tiempo->avanzar(60*5);
+		$tarjeta->recargar(10);
+		$cole->pagarCon($tarjeta, $tiempo);
+		$tiempo->avanzar(60*5);
+		$cole->pagarCon($tarjeta, $tiempo);
+		$tiempo->avanzar(60*5);
+		$cole->pagarCon($tarjeta, $tiempo);
+		$this->assertEquals($tarjeta->obtenerPlus(), 2);
+		$tiempo->avanzar(60*5);
+		$tarjeta->recargar(100);
+		$cole2= new Colectivo ("121 negro", 1, "Semtur");
+		$boleto2= new Boleto("Paga 2 plus", (($tarjeta->obtenerValor()*33)/100), $tarjeta->obtenerId(), "Medio", $tarjeta->obtenerSaldo()-($tarjeta->obtenerValor()*33)/100-$tarjeta->obtenerValor()*4, "Transbordo", $cole2->linea(), $cole2->empresa(), $cole2->numero(), date("d/m/Y H:i:s", $tiempo->tiempo()));
+		$this->assertEquals($cole2->pagarCon($tarjeta, $tiempo), $boleto2);
+	}
 
 
 }
