@@ -2,7 +2,7 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/MarianelaClara/TrabajoTarjeta2018/badge.svg?branch=master)](https://coveralls.io/github/MarianelaClara/TrabajoTarjeta2018?branch=master)
 
-## Trabajo Tarjeta: Versión 2018
+# Trabajo Tarjeta: Versión 2018
 
 El siguiente trabajo es un enunciado iterativo. Todas las semanas nuevos
 requerimientos serán agregados y/o modificados para ilustrar la dinámica de
@@ -98,3 +98,64 @@ cuantas veces se use y que dia de la semana sea.
 pagar un boleto.
 - Escribir un test que valide que el monto del boleto pagado con medio boleto es siempre la mitad del normal.
 
+ ## Iteracion 3 (28 de Agosto al 11 de Septiembre)
+
+
+Al igual que la iteración anterior, se pide mantener la mecánica de 
+trabajo para ir añadiendo las nuevas funcionalidades y/o modificaciones 
+(issue, una rama específica para cada tarea y finalmente el mergeo cuando 
+todo funcione correctamente..., etc.)
+
+En esta iteración daremos una introducción a la manipulación de fechas y 
+horarios. Éstos serán necesarios en esta oportunidad para realizar las 
+modificaciones pedidas. Consultar este video para conocer más sobre el manejo
+de fechas y horas en PHP: https://www.youtube.com/watch?v=dVRl1kqxdwY
+
+
+
+### Más datos sobre el boleto.
+
+- La clase boleto tendrá nuevos métodos que permitan conocer:
+(Fecha, tipo de tarjeta, línea de colectivo, total abonado, saldo e
+ID de la tarjeta. Recordar que el tipo de boleto (Normal, Viaje Plus) de los boletos indican si se hizo un viaje plus o no
+- Además el boleto tiene una descripcion extra indicando si se canceló viaje plus con el pago de este boleto (Ejemplo: Abona viajes plus 29.63 y).
+
+- Deben crearse los atributos faltantes de las correspondientes clases, si los hubiere.
+Considerar la [siguiente imagen](https://github.com/dagostinoips/TrabajoTarjeta2018/issues/4#issuecomment-417055819) para entender las posibles variaciones de un boleto:
+
+
+- Escribir los tests correspondientes a los posibles tipos de boletos a obtener según el tipo de tarjeta.
+
+
+### Limitación en el pago de medio boletos
+
+Para evitar el uso de una tarjeta de tipo medio boleto en más de una persona en el mismo viaje se pide que:
+- Al utilizar una tarjeta de tipo medio boleto para viajar, deban pasar como mínimo 5 minutos antes de realizar otro viaje. No será posible pagar otro viaje antes de que pasen estos 5 minutos.
+- Escribir un test que verifique efectivamente que no se deje marcar nuevamente al intentar realizar otro viaje en un intervalo menor a 5 minutos con la misma tarjeta medio boleto.
+Para el caso de medio boleto universitario, se pueden realizar solo dos viajes por día. El tercer viaje ya posee su valor normal.
+- Escribir un test que verifique que no se puedan realizar más de dos viajes por día.
+
+## Iteracion 4 (12 de Septiembre al 25 de Septiembre)
+
+### Cobertura de código.
+
+- Contar al menos con un 80% de cobertura de codigo en coveralls.io
+- Agregar el icono de coverals al README del proyecto.
+
+### Trasbordos
+
+Cuando se realiza un trasbordo, el 2º viaje se cancela a un 33% de la tarifa vigente:
+
+Se pueden abonar solamente con las tarjetas y se pueden realizar todos los días del año
+durante las 24 hs, **exceptuando la misma línea y bandera**, teniendo en cuenta tiempos
+máximos para realizarlos por franja horaria:
+
+- Lunes a viernes de 6 a 22 y sábados de 6 a 14 hs: tiempo máximo 60 minutos.
+- Sábados de las 14 a 22 hs, domingos y feriados de 6 a 22 hs: tiempo máximo 90
+minutos.
+- Noche, comprende franja horaria de 22 a 6 hs: tiempo máximo 90 minutos.
+
+Sólo se permite 1 trasbordo por tarjeta en cada viaje.
+
+Acercando la tarjeta se cancela el viaje emitiendo un boleto impreso con la palabra "trasbordo". No se efectiviza el trasbordo
+con la cancelación del pasaje plus.

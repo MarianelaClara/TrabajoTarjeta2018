@@ -79,4 +79,14 @@ class TarjetaTest extends TestCase {
         $this->assertFalse($tarjeta->recargar(15));
         $this->assertEquals($tarjeta->obtenerSaldo(), 0);
     }
+
+    public function testNocheTransbordo(){
+        $tarjeta= new Tarjeta;
+        $tiempo= new TiempoFalso;
+
+        $this->assertEquals(date("w", $tiempo->tiempo()), 4);
+        $this->assertEquals(date("H", $tiempo->tiempo()), 0);
+        $tarjeta->actualizarViaje($tiempo->tiempo(), "122 Negro");
+        $this->assertEquals($tarjeta->obtenerLimite(), date("d/m/Y H:i:s", $tiempo->tiempo()+ 60*90));
+    }
 }
