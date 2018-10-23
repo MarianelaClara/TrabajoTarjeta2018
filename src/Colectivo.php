@@ -99,7 +99,7 @@ class Colectivo implements ColectivoInterface {
 			}
 		}
 		if($tarjeta instanceof TarjetaMedioUni){
-			$diaActual= date("d", $tiempo->tiempo());
+			$diaActual= date("d/m/Y", $tiempo->tiempo());
 			if($diaActual==$tarjeta->obtenerDiaDeUso()){
 				if($tarjeta->obtenerUsoDeMedio()!=2){
 					if($tarjeta->obtenerPlus() ==0 ){
