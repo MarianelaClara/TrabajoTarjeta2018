@@ -574,15 +574,13 @@ class ColectivoTest extends TestCase {
 		$tiempo= new TiempoFalso(5);
 		$tiempo->reset();
 		$tiempo->avanzar(5);
-		$tiempo->avanzar(60*60*23);
+		$tiempo->avanzar(60*60*23.5);
 		$cole->pagarCon($tarjetaMedioUni, $tiempo);
-		$tiempo->avanzar(60*60);
+		$tiempo->avanzar(60*40);
 		$cole->pagarCon($tarjetaMedioUni, $tiempo);
 		$boleto = new Boleto("", (($tarjetaMedioUni->obtenerValor()*33)/100), $tarjetaMedioUni->obtenerId(), "MedioUni", $tarjetaMedioUni->obtenerSaldo()-(($tarjetaMedioUni->obtenerValor()*33)/100), "Transbordo", $cole1->linea(), $cole1->empresa(), $cole1->numero(), date("d/m/Y H:i:s", $tiempo->tiempo()));
 		$this->assertEquals($cole1->pagarCon($tarjetaMedioUni, $tiempo), $boleto);
 
 		//este nop
 	}
-
-
 }
