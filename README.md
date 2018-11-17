@@ -2,6 +2,7 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/MarianelaClara/TrabajoTarjeta2018/badge.svg?branch=master)](https://coveralls.io/github/MarianelaClara/TrabajoTarjeta2018?branch=master)
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/MarianelaClara/TrabajoTarjeta2018/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/MarianelaClara/TrabajoTarjeta2018/?branch=master)
 # Trabajo Tarjeta: Versión 2018
 
 El siguiente trabajo es un enunciado iterativo. Todas las semanas nuevos
@@ -159,3 +160,12 @@ Sólo se permite 1 trasbordo por tarjeta en cada viaje.
 
 Acercando la tarjeta se cancela el viaje emitiendo un boleto impreso con la palabra "trasbordo". No se efectiviza el trasbordo
 con la cancelación del pasaje plus.
+
+
+## Iteracion 5
+
+- Formatear el código de todo el proyecto utilizando un Coding Standard en particular. (PSR2, Drupal, Wordpress)
+- Documentar todos los metodos del proyecto utilizando la sintaxis correcta. Ejemplo: https://gist.github.com/dagostinoips/0bb7aa98a80d0dba11fb4e1c87038bdc
+- Configurar scrutinizer-ci para que haga un analisis del código del proyecto.
+- Contar con un indice de A o B para cada archivo del proyecto.
+- Agregar al README los badges ([![Build Status](https://travis-ci.org/dagostinoips/TrabajoTarjeta2018.svg?branch=master)](https://travis-ci.org/dagostinoips/TrabajoTarjeta2018)) de Travis, Coveralls y Scrunitizer.
