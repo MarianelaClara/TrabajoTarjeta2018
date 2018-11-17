@@ -16,16 +16,16 @@ class Boleto implements BoletoInterface {
     protected $fecha;
 
     public function __construct($pagaPlus, $valor, $idTarjeta, $tipoTarjeta, $saldoActual, $tipoBoleto, $linea, $empresa, $numeroColectivo, $fecha) {
-        $this->pagaPlus= $pagaPlus;
+        $this->pagaPlus = $pagaPlus;
         $this->valor = $valor;
-        $this->idTarjeta= $idTarjeta;
-        $this->tipoTarjeta= $tipoTarjeta;
-        $this->saldoActual= $saldoActual;
-        $this->tipoBoleto= $tipoBoleto;
-        $this->linea= $linea;
-        $this->empresa= $empresa;
-        $this->numeroColectivo= $numeroColectivo;
-        $this->fecha= $fecha;
+        $this->idTarjeta = $idTarjeta;
+        $this->tipoTarjeta = $tipoTarjeta;
+        $this->saldoActual = $saldoActual;
+        $this->tipoBoleto = $tipoBoleto;
+        $this->linea = $linea;
+        $this->empresa = $empresa;
+        $this->numeroColectivo = $numeroColectivo;
+        $this->fecha = $fecha;
     }
 
     /**
@@ -37,35 +37,35 @@ class Boleto implements BoletoInterface {
         return $this->valor;
     }
 
-    public function obtenerIdTarjeta(){
+    public function obtenerIdTarjeta() {
         return $this->idTarjeta;
     }
 
-    public function obtenerTipoTarjeta(){
+    public function obtenerTipoTarjeta() {
         return $this->tipoTarjeta;
     }
 
-    public function obtenerSaldoActual(){
+    public function obtenerSaldoActual() {
         return $this->saldoActual;
     }
 
-    public function obtenerTipoBoleto(){
+    public function obtenerTipoBoleto() {
         return $this->tipoBoleto;
     }
 
-    public function obtenerLinea(){
+    public function obtenerLinea() {
         return $this->linea;
     }
 
-    public function obtenerEmpresa(){
+    public function obtenerEmpresa() {
         return $this->empresa;
     }
 
-    public function obtenerNumeroColectivo(){
+    public function obtenerNumeroColectivo() {
         return $this->numeroColectivo;
     }
 
-    public function obtenerFecha(){
+    public function obtenerFecha() {
         return $this->fecha;
     }
 

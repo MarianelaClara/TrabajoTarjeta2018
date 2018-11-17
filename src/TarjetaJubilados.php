@@ -3,7 +3,7 @@
 namespace TrabajoTarjeta;
 
 class TarjetaJubilados extends Tarjeta {
-    public function pagar(){
+    public function pagar() {
         return TRUE;
     }
 }
