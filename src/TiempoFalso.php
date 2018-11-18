@@ -7,7 +7,7 @@ class TiempoFalso implements TiempoInterface {
     protected $tiempito;
     protected $feriadito;
 
-    public function __construct($iniciar = 0, $feriado=FALSE) {
+    public function __construct($iniciar = 0, $feriado = FALSE) {
         $this->tiempito = $iniciar;
         $this->feriadito = $feriado;
     }
