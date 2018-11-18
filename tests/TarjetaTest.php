@@ -86,7 +86,7 @@ class TarjetaTest extends TestCase {
 
         $this->assertEquals(date("w", $tiempo->tiempo()), 4);
         $this->assertEquals(date("H", $tiempo->tiempo()), 0);
-        $tarjeta->actualizarViaje($tiempo->tiempo(), "122 Negro");
+        $tarjeta->actualizarViaje($tiempo->tiempo(), "122 Negro", $tiempo->obtenerFeriado());
         $this->assertEquals($tarjeta->obtenerLimite(), date("d/m/Y H:i:s", $tiempo->tiempo()+ 60*90));
     }
 
@@ -97,7 +97,7 @@ class TarjetaTest extends TestCase {
         $this->assertEquals(date("w", $tiempo->tiempo()), 4);
         $this->assertEquals(date("H", $tiempo->tiempo()), 0);
         $tiempo->avanzar(60*60*7);
-        $tarjeta->actualizarViaje($tiempo->tiempo(), "122 Negro");
+        $tarjeta->actualizarViaje($tiempo->tiempo(), "122 Negro", $tiempo->obtenerFeriado());
         $this->assertEquals($tarjeta->obtenerLimite(), date("d/m/Y H:i:s", $tiempo->tiempo()+ 60*60));
     }
 
@@ -111,7 +111,15 @@ class TarjetaTest extends TestCase {
         $tiempo->avanzar(60*60*7);
         $this->assertEquals(date("w", $tiempo->tiempo()), 6);
         $this->assertEquals(date("H", $tiempo->tiempo()), 7);
-        $tarjeta->actualizarViaje($tiempo->tiempo(), "122 Negro");
+        $tarjeta->actualizarViaje($tiempo->tiempo(), "122 Negro", $tiempo->obtenerFeriado());
         $this->assertEquals($tarjeta->obtenerLimite(), date("d/m/Y H:i:s", $tiempo->tiempo()+ 60*90));
+    }
+    
+    public function testActualizarViaje(){
+        $tarjeta = new Tarjeta;
+        $tiempo= new TiempoFalso(0, TRUE);
+        $this->assertEquals($tarjeta->obtenerLimite(), 0);
+        $tarjeta->actualizarViaje($tiempo->tiempo(), "122 Negro", $tiempo->obtenerFeriado());
+        $this->assertEquals($tarjeta->obtenerLimite(), date("d/m/Y H:i:s", 90*60));
     }
 }

@@ -58,13 +58,13 @@ class Tarjeta implements TarjetaInterface {
       return $this->limiteTransbordo;
     }
 
-    public function actualizarViaje($fecha, $cole) {
+    public function actualizarViaje($fecha, $cole, $feriado) {
       $this->viajeTransbordo = date("d/m/Y H:i:s", $fecha);
       $this->ultimoCole = $cole;
       if (date("H", $fecha) >= 22 || date("H", $fecha) < 6) {
         $this->limiteTransbordo = date("d/m/Y H:i:s", ($fecha + 90 * 60));
       }
-      elseif (date("w", $fecha) >= 1 && date("w", $fecha) <= 5) {
+      elseif (date("w", $fecha) >= 1 && date("w", $fecha) <= 5 && $feriado != TRUE) {
         $this->limiteTransbordo = date("d/m/Y H:i:s", ($fecha + 60 * 60));
       }
       else {

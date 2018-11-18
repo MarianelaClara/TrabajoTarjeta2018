@@ -36,7 +36,7 @@ class Colectivo implements ColectivoInterface {
           }
           if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()){
             $tarjeta->resetTransbordo();
-            $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea);
+            $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea, $tiempo->obtenerFeriado());
             $tarjeta->pagarNormal();
             $tarjeta->ultimoViaje= $tiempo->tiempo();
             return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Medio", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
@@ -57,7 +57,7 @@ class Colectivo implements ColectivoInterface {
           }
           if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*3){
             $tarjeta->resetTransbordo();
-            $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea);
+            $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea, $tiempo->obtenerFeriado());;
             $tarjeta->pagarPlus();
             $tarjeta->pagarNormal();
             $tarjeta->pagarNormal();
@@ -81,7 +81,7 @@ class Colectivo implements ColectivoInterface {
           }
           if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*5){
             $tarjeta->resetTransbordo();
-            $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea);	
+            $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea, $tiempo->obtenerFeriado());;	
             $tarjeta->pagarPlus();
             $tarjeta->pagarNormal();
             $tarjeta->pagarNormal();
@@ -111,7 +111,7 @@ class Colectivo implements ColectivoInterface {
             }
             if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()){
               $tarjeta->resetTransbordo();
-              $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea);
+              $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea, $tiempo->obtenerFeriado());;
               $tarjeta->pagarNormal();
               $tarjeta->usarMedio();
               return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "MedioUni", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
@@ -132,7 +132,7 @@ class Colectivo implements ColectivoInterface {
             }
             if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*3){
               $tarjeta->resetTransbordo();
-              $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea);
+              $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea, $tiempo->obtenerFeriado());;
               $tarjeta->pagarPlus();
               $tarjeta->pagarNormal();
               $tarjeta->usarMedio();
@@ -156,7 +156,7 @@ class Colectivo implements ColectivoInterface {
             }
             if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*5){
               $tarjeta->resetTransbordo();
-              $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea);
+              $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea, $tiempo->obtenerFeriado());;
               $tarjeta->pagarPlus();
               $tarjeta->pagarNormal();
               $tarjeta->pagarNormal();
@@ -178,7 +178,7 @@ class Colectivo implements ColectivoInterface {
             }
             if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*2){
               $tarjeta->resetTransbordo();
-              $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea);
+              $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea, $tiempo->obtenerFeriado());;
               $tarjeta->pagarNormal();
               $tarjeta->pagarNormal();
               return new Boleto("", $tarjeta->obtenerValor()*2, $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
@@ -198,7 +198,7 @@ class Colectivo implements ColectivoInterface {
             }
             if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*4){
               $tarjeta->resetTransbordo();
-              $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea);
+              $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea, $tiempo->obtenerFeriado());;
               $tarjeta->pagarPlus();
               $tarjeta->pagarNormal();
               $tarjeta->pagarNormal();
@@ -244,7 +244,7 @@ class Colectivo implements ColectivoInterface {
           }
           if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()){
             $tarjeta->resetTransbordo();
-            $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea);
+            $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea, $tiempo->obtenerFeriado());;
             $tarjeta->pagarNormal();
             $tarjeta->usarMedio();
             return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "MedioUni", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
@@ -265,7 +265,7 @@ class Colectivo implements ColectivoInterface {
           }
           if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*3){
             $tarjeta->resetTransbordo();
-            $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea);
+            $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea, $tiempo->obtenerFeriado());;
             $tarjeta->pagarPlus();
             $tarjeta->pagarNormal();
             $tarjeta->pagarNormal();
@@ -289,7 +289,7 @@ class Colectivo implements ColectivoInterface {
           }
           if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*5){
             $tarjeta->resetTransbordo();
-            $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea);
+            $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea, $tiempo->obtenerFeriado());;
             $tarjeta->pagarPlus();
             $tarjeta->pagarNormal();
             $tarjeta->pagarNormal();
@@ -315,7 +315,7 @@ class Colectivo implements ColectivoInterface {
         }
         if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()){
           $tarjeta->resetTransbordo();
-          $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea);
+          $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea, $tiempo->obtenerFeriado());;
           $tarjeta->pagarNormal();
           return new Boleto("", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
         }
@@ -333,7 +333,7 @@ class Colectivo implements ColectivoInterface {
         }
         if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*2){
           $tarjeta->resetTransbordo();
-          $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea);
+          $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea, $tiempo->obtenerFeriado());;
           $tarjeta->pagarPlus();
           $tarjeta->pagarNormal();
           return new Boleto("Paga 1 plus", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
@@ -352,7 +352,7 @@ class Colectivo implements ColectivoInterface {
         }
         if($tarjeta->obtenerSaldo() >= $tarjeta->obtenerValor()*3){
           $tarjeta->resetTransbordo();
-          $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea);
+          $tarjeta->actualizarViaje($tiempo->tiempo(), $this->linea, $tiempo->obtenerFeriado());;
           $tarjeta->pagarPlus();
           $tarjeta->pagarNormal();
           return new Boleto("Paga 2 plus", $tarjeta->obtenerValor(), $tarjeta->obtenerId(), "Normal", $tarjeta->obtenerSaldo(), "Normal", $this->linea, $this->empresa, $this->numero, date("d/m/Y H:i:s", $tiempo->tiempo()));
