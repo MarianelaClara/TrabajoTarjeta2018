@@ -126,6 +126,7 @@ class ColectivoTest extends TestCase {
 		$cole= new Colectivo ("122 negro", 1, "Semtur");
 		$tarjetaMedio= new TarjetaMedio;
 		$tiempo= new TiempoFalso(5);
+		$tiempo->avanzar(5);
 		$boleto= new Boleto("", $tarjetaMedio->obtenerValor(), $tarjetaMedio->obtenerId(), "Medio", $tarjetaMedio->obtenerSaldo(), "Primer Plus", $cole->linea(), $cole->empresa(),$cole->numero(), date("d/m/Y H:i:s", $tiempo->tiempo()));
 		$this->assertEquals($cole->pagarCon($tarjetaMedio, $tiempo), $boleto);
 	}
