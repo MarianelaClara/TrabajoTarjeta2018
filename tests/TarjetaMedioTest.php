@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 class TarjetaMedioTest extends TestCase {
 
     /**
-     * Comprueba que la tarjeta aumenta su saldo cuando se carga saldo válido.
+     * Comprueba cuales son los montos de recarga validos para una tarjeta medio boleto.
      */
     public function testCargaSaldo() {
         $tarjetaMedio = new TarjetaMedio;
@@ -36,14 +36,20 @@ class TarjetaMedioTest extends TestCase {
 
 
     }
-    
+     /**
+     * Comprueba que no todos los saldos son validos.
+     */
+
     public function testCargaSaldoInvalido() {
         $tarjetaMedio = new TarjetaMedio;
 
         $this->assertFalse($tarjetaMedio->recargar(15));
         $this->assertEquals($tarjetaMedio->obtenerSaldo(), 0);
     }
-     
+     /**
+     * Comprueba que al pagar se resta la mitad del saldo establecido.
+     */
+ 
     public function testPagarMedio(){
         $tarjetaMedio = new TarjetaMedio;
         $tarjetaMedio->recargar(50);
@@ -52,7 +58,10 @@ class TarjetaMedioTest extends TestCase {
         $tarjetaMedio->PagarNormal();
         $this->assertEquals($tarjetaMedio->obtenerSaldo(), 50-($tarjetaMedio->obtenerValor())*2);
     }
-    
+     /**
+     * Comprueba que las tarjetas medio pueden utilizar 2 plus.
+     */
+
     public function testUsarPlusMedio(){
         $tarjetaMedio = new TarjetaMedio;
         $tarjetaMedio->UsarPlus();
@@ -61,6 +70,10 @@ class TarjetaMedioTest extends TestCase {
         $this->assertEquals($tarjetaMedio->obtenerPlus(), 2);
        
     }
+     /**
+     * Comprueba que las tarjetas medio pagan los plus como viajes normales.
+     */
+
     public function testPagarPlusMedio(){
         $tarjetaMedio = new TarjetaMedio;
         $tarjetaMedio->UsarPlus();

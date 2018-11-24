@@ -5,7 +5,9 @@ namespace TrabajoTarjeta;
 use PHPUnit\Framework\TestCase;
 
 class TarjetaJubiladosTest extends TestCase {
-
+    /**
+     * Verifica la tarjeta Jubilados siempre pueda realizar un viaje.
+     */
     public function testPagar (){
         $i=0;
         $tarjetaJubilado = new TarjetaJubilados;

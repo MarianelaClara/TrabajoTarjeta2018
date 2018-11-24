@@ -7,23 +7,51 @@ class Colectivo implements ColectivoInterface {
   protected $linea;
   protected $numero;
   protected $empresa;
-
+    /**
+     * Se encarga de darle los parametros iniciales al objeto colectivo.
+     *
+     * @param string $linea, int $numero, string $empresa
+     *  Siendo estos, la linea, el numero y la empresa del colectivo a crear.
+     */
   public function __construct($linea, $numero, $empresa) {
       $this->linea = $linea;
     $this->numero = $numero;
     $this->empresa = $empresa;
   }
-
+    /**
+     * Devuelve el nombre de la linea. Ejemplo '142 Negro'
+     *
+     * @return string
+     */
   public function linea() {
     return $this->linea;
   }
+    /**
+     * Devuelve el nombre de la empresa. Ejemplo 'Semtur'
+     *
+     * @return string
+     */
   public function empresa() {
     return $this->empresa;
   }
+    /**
+     * Devuelve el numero de unidad. Ejemplo: 12
+     *
+     * @return int
+     */
   public function numero() {
     return $this->numero;
   }
-	
+    /**
+     * Paga un viaje en el colectivo con una tarjeta en particular.
+     *
+     * @param TarjetaInterface $tarjeta, TiempoInterface $tiempo
+     *  Siendo estos, la tarjeta con la que se pagaŕa, y el la fecha en la que se hará.
+     *
+     * @return BoletoInterface|FALSE
+     *  El boleto generado por el pago del viaje. O FALSE si no hay saldo
+     *  suficiente en la tarjeta.
+     */	
   public function pagarCon(TarjetaInterface $tarjeta, TiempoInterface $tiempo) {
 
     if ($tarjeta instanceof TarjetaMedio) {

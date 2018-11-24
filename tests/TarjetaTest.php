@@ -35,6 +35,10 @@ class TarjetaTest extends TestCase {
         $this->assertEquals($tarjeta->obtenerSaldo(), 1986.25);
 
     }
+     /**
+     * Comprueba que al pagar a las tarjetas se les descuenta del saldo el valor establecido.
+     */
+
     public function testPagarNormal(){
         $tarjeta = new Tarjeta;
         $tarjeta->recargar(50);
@@ -43,7 +47,10 @@ class TarjetaTest extends TestCase {
         $tarjeta->PagarNormal();
         $this->assertEquals($tarjeta->obtenerSaldo(), 50-($tarjeta->obtenerValor())*2);
     }
-    
+     /**
+     * Comprueba que las tarjetas pueden utilizar 2 plus.
+     */
+
     public function testUsarPlus(){
         $tarjeta = new Tarjeta;
         $tarjeta->UsarPlus();
@@ -52,6 +59,10 @@ class TarjetaTest extends TestCase {
         $this->assertEquals($tarjeta->obtenerPlus(), 2);
         
     }
+     /**
+     * Comprueba que las tarjetas pueden pagar los plus como viajes adicionales a la hora de pagar 
+     * un viaje normal.
+     */
 
     public function testPagarPlus(){
     $tarjeta = new Tarjeta;
@@ -79,6 +90,10 @@ class TarjetaTest extends TestCase {
         $this->assertFalse($tarjeta->recargar(15));
         $this->assertEquals($tarjeta->obtenerSaldo(), 0);
     }
+     /**
+     * Comprueba que tiempo para utilizar un transbordo cuando se realiza un viaje
+     * de noche, es de una hora y media.
+     */
 
     public function testNocheTransbordo(){
         $tarjeta= new Tarjeta;
@@ -89,7 +104,10 @@ class TarjetaTest extends TestCase {
         $tarjeta->actualizarViaje($tiempo->tiempo(), "122 Negro", $tiempo->obtenerFeriado());
         $this->assertEquals($tarjeta->obtenerLimite(), date("d/m/Y H:i:s", $tiempo->tiempo()+ 60*90));
     }
-
+     /**
+     * Comprueba que tiempo para utilizar un transbordo cuando se realiza un viaje
+     * de dia en un día de semana, es de una hora.
+     */
     public function testSemanaTransbordo(){
         $tarjeta= new Tarjeta;
         $tiempo= new TiempoFalso;
@@ -100,7 +118,10 @@ class TarjetaTest extends TestCase {
         $tarjeta->actualizarViaje($tiempo->tiempo(), "122 Negro", $tiempo->obtenerFeriado());
         $this->assertEquals($tarjeta->obtenerLimite(), date("d/m/Y H:i:s", $tiempo->tiempo()+ 60*60));
     }
-
+     /**
+     * Comprueba que tiempo para utilizar un transbordo cuando se realiza un viaje
+     * en un fin de semana, es de una hora y media.
+     */
     public function testFindeTransbordo(){
         $tarjeta= new Tarjeta;
         $tiempo= new TiempoFalso;
@@ -114,8 +135,11 @@ class TarjetaTest extends TestCase {
         $tarjeta->actualizarViaje($tiempo->tiempo(), "122 Negro", $tiempo->obtenerFeriado());
         $this->assertEquals($tarjeta->obtenerLimite(), date("d/m/Y H:i:s", $tiempo->tiempo()+ 60*90));
     }
-    
-    public function testActualizarViaje(){
+     /**
+     * Comprueba que tiempo para utilizar un transbordo cuando se realiza un viaje
+     * un día feriado, es de una hora y media.
+     */
+    public function testTransbordoFeriado(){
         $tarjeta = new Tarjeta;
         $tiempo= new TiempoFalso(0, TRUE);
         $this->assertEquals($tarjeta->obtenerLimite(), 0);
