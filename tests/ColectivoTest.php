@@ -127,7 +127,7 @@ class ColectivoTest extends TestCase {
 		$tarjetaMedio= new TarjetaMedio;
 		$tiempo= new TiempoFalso;
 		$boleto= new Boleto("", $tarjetaMedio->obtenerValor(), $tarjetaMedio->obtenerId(), "Medio", $tarjetaMedio->obtenerSaldo(), "Primer Plus", $cole->linea(), $cole->empresa(),$cole->numero(), date("d/m/Y H:i:s", $tiempo->tiempo()));
-		$this->assertEquals($cole->pagarCon($tarjetaMedi, $tiempo), $boleto);
+		$this->assertEquals($cole->pagarCon($tarjetaMedio, $tiempo), $boleto);
 	}
 	/**
      * Comprueba que es si no se posee el saldo para un viaje se podra efectuar de todas
