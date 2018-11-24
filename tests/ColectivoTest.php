@@ -122,14 +122,13 @@ class ColectivoTest extends TestCase {
      * Comprueba que es si no se posee el saldo para un viaje se podra efectuar de todas
 	 * formas utilizando el primer plus, para tarejtas de medio boleto.
      */	
-	public function testUsarPrimerPlusMedio(){
-		$cole= new Colectivo ("122 negro", 1, "Semtur");
-		$tarjetaMedio= new TarjetaMedio;
-		$tiempo= new TiempoFalso(5);
-		$tiempo->avanzar(5);
-		$boleto= new Boleto("", $tarjetaMedio->obtenerValor(), $tarjetaMedio->obtenerId(), "Medio", $tarjetaMedio->obtenerSaldo(), "Primer Plus", $cole->linea(), $cole->empresa(),$cole->numero(), date("d/m/Y H:i:s", $tiempo->tiempo()));
-		$this->assertEquals($cole->pagarCon($tarjetaMedio, $tiempo), $boleto);
-	}
+    public function testUsarPrimerPlusMedio(){
+	$cole= new Colectivo ("122 negro", 1, "Semtur");
+	$tarjetaMedio= new TarjetaMedio;
+	$tiempo= new TiempoFalso(5*60);
+	$boleto= new Boleto("", $tarjetaMedio->obtenerValor(), $tarjetaMedio->obtenerId(), "Medio", $tarjetaMedio->obtenerSaldo(), "Primer Plus", $cole->linea(), $cole->empresa(),$cole->numero(), date("d/m/Y H:i:s", $tiempo->tiempo()));
+	$this->assertEquals($cole->pagarCon($tarjetaMedio, $tiempo), $boleto);
+}
 	/**
      * Comprueba que es si no se posee el saldo para un viaje se podra efectuar de todas
 	 * formas utilizando el primer plus, para tarejtas de medio boleto universitario.
